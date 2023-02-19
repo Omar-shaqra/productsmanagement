@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<%-include('header')-%>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Add Product</title>
+
+	<!-- Google font -->
+
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="colorlib-booking-5/css/bootstrap.min.css" />
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="colorlib-booking-5/css/style.css" />
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+<style media="screen">
+
+#myTable {
+border-collapse: collapse; /* Collapse borders */
+width: 100%; /* Full-width */
+border: 1px solid #ddd; /* Add a grey border */
+font-size: 18px; /* Increase font-size */
+}
+
+#myTable th, #myTable td {
+text-align: left; /* Left-align text */
+padding: 12px; /* Add padding */
+}
+
+#myTable tr {
+/* Add a bottom border to all table rows */
+border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+/* Add a grey background color to the table header and on hover */
+background-color: #f1f1f1;
+}
+
+
+#myInput {
+background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+background-position: 10px 12px; /* Position the search icon */
+background-repeat: no-repeat; /* Do not repeat the icon image */
+width: 100%; /* Full-width */
+font-size: 16px; /* Increase font-size */
+padding: 12px 20px 12px 40px; /* Add some padding */
+border: 1px solid #ddd; /* Add a grey border */
+margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myInput2 {
+background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+background-position: 10px 12px; /* Position the search icon */
+background-repeat: no-repeat; /* Do not repeat the icon image */
+width: 100%; /* Full-width */
+font-size: 16px; /* Increase font-size */
+padding: 12px 20px 12px 40px; /* Add some padding */
+border: 1px solid #ddd; /* Add a grey border */
+margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myInput3 {
+background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+background-position: 10px 12px; /* Position the search icon */
+background-repeat: no-repeat; /* Do not repeat the icon image */
+width: 100%; /* Full-width */
+font-size: 16px; /* Increase font-size */
+padding: 12px 20px 12px 40px; /* Add some padding */
+border: 1px solid #ddd; /* Add a grey border */
+margin-bottom: 12px; /* Add some space below the input */
+}
+
+
+</style>
+
+<script type="text/javascript">
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+    var sumVal = 0;
+var j = 0 ;
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 2; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        var ex = tr[i].getElementsByTagName("td")[2].textContent || tr[i].getElementsByTagName("td")[2].innerText;
+              sumVal = sumVal + parseFloat(ex) ;
+
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+
+
+  }
+
+
+  document.getElementById("total").innerHTML = sumVal;
+
+
+}
+
+
+
+
+</script>
+
+</head>
+
+<body  style="background-color: #DEDDF0; ">
+	<div id="booking" class="section">
+		<div class="section-center">
+
+			<div class="container">
+			<h1 style="color: grey; "> :  نثريات</h3>
+				<div class="row">
+					<div class="booking-form">
+						<form method="POST">
+						<br><br>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<span class="form-label"><h3>: البيان </h3>  </span><br>
+
+
+                    <input  name="data" required list="country-list" onkeyup="keyup()" class="form-select form-control" aria-label="Default select example" />
+                    <datalist id="country-list">
+
+
+
+                    <!--    <select  id="parcode"  onclick="keyup()" class="form-select" aria-label="Default select example"> -->
+                      <option></option>
+
+                    <% result.forEach(function(result){%>
+                    <option ><%=result.data%>
+
+                      </option>
+                    <%  }) %>
+
+
+                    </datalist>
+
+
+									</div>
+								</div>
+
+
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label"> <h3>  المبلغ  </h3></span><br>
+										<input class="form-control" maxlength="68" name="cashe" type="number" required>
+									</div>
+								</div>
+
+
+							</div>
+				<h3 style="color: white;"> Date :
+							<input type="text" placeholder="Price" style="color:black;" name="date" id="date" readonly> </h3>
+							<script>
+							n =  new Date();
+							y = n.getFullYear();
+							m = n.getMonth() + 1;
+							d = n.getDate();
+							document.getElementById("date").value = d + "/" + m + "/" + y;
+							</script>
+
+							<div class="row">
+
+								<div class="col-md-3">
+									<div class="form-btn">
+										 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+										<button type="submit" class="submit-btn"> Configure  </button>
+
+									</div>
+								</div>
+
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="card" style="margin:2%; ">
+  <div class="card-body">
+
+
+
+		<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by date..">
+
+		<br><br>
+
+     <h5 class="card-title"> <span style="font-size:30px; font-weight:bold;" class="input-group-text">  Total price : <div onload="gettotal()" id="total">0</div> $</span></h5>
+	<table style="font-size: 30px; " onload="tr()" class="table table-sm table-hover"  border="1" cellpadding="3" id="myTable" >
+		<th>
+				<tr>
+
+					<th scope="col">date</th>
+
+					<th scope="col"> البيان </th>
+
+					<th scope="col"> المبلغ </th>
+
+
+
+				</tr>
+
+		</th>
+		<tbody>
+			<% result.forEach(function(result){%>
+			<tr>
+
+        <td><%=result.date%></td>
+
+        		<td><%=result.data%></td>
+
+        		<td><%=result.cashe%></td>
+
+
+
+</tr>
+		<%  }) %>
+		</tbody>
+	</table>
+
+</div>
+</div>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
