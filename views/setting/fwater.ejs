@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<%-include('header')-%>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    		<link rel="stylesheet" href="bootstrap-buttons-16/css/ionicons.min.css">
+    		<link rel="stylesheet" href="bootstrap-buttons-16/css/style.css">
+</head>
+<body style="background-color: #DEDDF0;">
+
+  <nav class="navbar navbar-dark bg-dark" style="margin: 2%; color : #a9a9a9;">
+  <div class="container-fluid">
+<span>
+        <input type="text" value="N.Fatwra : " id="SearchTxt" /><input type="button" id="SearchBtn" value="Search" onclick="doSearch(document.getElementById('SearchTxt').value)" />
+</span>
+  </div>
+</nav>
+<br><br>
+<div class="card-group">
+  <% result.forEach(function(result){%>
+
+        <div class="row row-cols-1 row-cols-md-2 g-4 text-white bg-secondary mb-3" style="width: 18rem; margin : 2%">
+          <div class="card-body" style="font-size: 20px">
+             <div class="card-header bg-transparent border-success">
+            <h5 class="card-title">Date : <%=result.date%></h5>
+            <h6 class="card-subtitle mb-2 text-muted" ><p style="color: white;">N.Fatwra :  <%=result.num%></p></h6>
+          </div>
+            <p class="card-text"> Details : <%=result.fatwra%></p>
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+        </div>
+
+<%})%>
+</div>
+    <script>
+        function doSearch( text) {
+            if (window.find(text)) {
+                console.log(window.find(text));
+            }
+        }
+
+    </script>
+
+</body>
+</html>
