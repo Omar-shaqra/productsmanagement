@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<%-include('header')-%>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="bootstrap-5.0.2-dist/js/bootstrap.min.js">
+   </script>
+   <script type="text/javascript">
+
+   function myFunction() {
+     // Declare variables
+     var input, filter, table, tr, td, i, txtValue;
+     input = document.getElementById("myInput");
+     filter = input.value.toUpperCase();
+     table = document.getElementById("myTable");
+     tr = table.getElementsByTagName("tr");
+       var sumVal = 0;
+         var sumVal2 = 0;
+
+   var j = 0 ;
+     // Loop through all table rows, and hide those who don't match the search query
+     for (i = 1; i < tr.length; i++) {
+       td = tr[i].getElementsByTagName("td")[1];
+
+
+       if (td) {
+         txtValue = td.textContent || td.innerText;
+         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+           tr[i].style.display = "";
+
+         } else {
+           tr[i].style.display = "none";
+         }
+       }
+
+
+     }
+
+
+
+   }
+
+   </script>
+  </head>
+  <body style="background-color: #DEDDF0; ">
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="بحث عن طريق الاسم .. ">
+    <form method="post">
+
+
+
+        <table id="myTable" class="table table-dark table-striped" style="font-size:20px; ">
+      <thead>
+        <tr >
+    <th  scope="col">Parcode</th>
+          <th scope="col">Name</th>
+          <th scope="col">سعر الشراء</th>
+          <th scope="col">سعر البيع</th>
+          <th scope="col">الصافي</th>
+            <th scope="col">الكمية</th>
+<th scope="col"></th>
+
+        </tr>
+      </thead>
+      <tbody>
+
+          <% result.forEach(function(result){%>
+                <tr>
+
+
+
+           <td> <textarea name="table" readonly> <%= result.parcode %> </textarea></td>
+             <td> <textarea name="table" readonly> <%= result.name %> </textarea> </td>
+             <td><%= result.priceOfbuy %></td>
+             <td><%= result.priceOfsell %></td>
+               <td><%= result.safy %></td>
+              <td><%= result.quantity %></td>
+
+    <td>
+    <a href="/update2/<%= result.parcode %>/<%= result.name %>/<%= result.priceOfbuy %>/<%= result.priceOfsell %>/<%= result.quantity %>">update</a>
+    </td>
+
+               </tr>
+
+          <%})%>
+
+
+
+      </tbody>
+    </table>
+        </form>
+
+  </body>
+</html>
