@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<%-include('header')-%>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Add Product</title>
+
+
+
+	<!-- Google font -->
+
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="colorlib-booking-5/css/bootstrap.min.css" />
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="colorlib-booking-5/css/style.css" />
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+<script type="text/javascript">
+function kup(){
+var parcode = x.substring(0,x.indexOf(":")-1);
+document.getElementById("par2").value = parcode;
+}
+
+function Search()
+{
+  var SearchKeyWord=document.getElementById("SearchText").value;
+  var SelLength=document.myform.parcode.length;
+  for(var i=0; i<SelLength;i++)
+  {
+    var searched_text = document.myform.parcode.options[i].text;
+    var IsMatch = searched_text.search(SearchKeyWord);
+    if(IsMatch != -1)
+    {
+
+    //  document.myform.parcode.options[i].selected = true;
+      document.myform.parcode.options[i].style.color = 'red';
+      document.getElementById("parcode").value = searched_text;
+      keyup();
+    }
+    else
+    {
+      document.myform.parcode.options[i].style.color = 'black';
+    }
+  }
+}
+
+</script>
+
+
+</head>
+
+<body  style="background-color: #DEDDF0; ">
+	<div id="booking" class="section">
+		<div class="section-center">
+
+			<div class="container">
+			<h1 style="color: grey; ">  ADD Product : </h3>
+				<div class="row">
+					<div class="booking-form">
+						<form method="POST" name="myform">
+						<br><br>
+<input type="text" name="SearchText" onkeyup="Search()" id="SearchText" list="country-list" class="form-select form-control" aria-label="Default select example">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+
+
+
+										<span class="form-label"><h3> product Parcode </h3>  </span><br>
+
+											<select id="parcode" name="parcode" required list="country-list" onkeyup="keyup()" class="form-select form-control" aria-label="Default select example" />
+
+
+
+
+										<!--    <select  id="parcode"  onclick="keyup()" class="form-select" aria-label="Default select example"> -->
+												<option></option>
+										<option  >other</option>
+										<% result.forEach(function(result){%>
+										<option ><%=result.parcode%> :
+										<%=result.name%>   $
+										<%=result.priceOfsell%> // <%=result.quantity%>
+												</option>
+										<%  }) %>
+
+
+									</select>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<span class="form-label"> <h3> Quantity </h3> </span><br>
+										<input class="form-control" maxlength="10" type="number" min="1" name="quantity" placeholder="Quantity" required>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label"> <h3>  Date </h3> </span><br>
+										<input class="form-control" id="date" name="buy" type="text"  required>
+									</div>
+								</div>
+                <script type="text/javascript">
+                n =  new Date();
+                y = n.getFullYear();
+                m = n.getMonth() + 1;
+                d = n.getDate();
+                document.getElementById("date").value = d + "/" + m + "/" + y;
+                </script>
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label"> <h3 style="color: skyblue; ">  if you can't find the product you should add it ....  </h3></span><br>
+									<br><br><a href="/Nproducts">	<button type="button" style="margin-left: 55% " class="btn btn-primary">add</button>
+								</a>	</div>
+								</div>
+
+
+							</div>
+							<div class="row">
+
+								<div class="col-md-3">
+									<div class="form-btn">
+										<button type="submit" class="submit-btn"> Configure  </button>
+									</div>
+									<br>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
