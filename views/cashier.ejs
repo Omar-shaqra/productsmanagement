@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+<link rel="stylesheet" type="text/css" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
+<script type="text/javascript" src="bootstrap-5.0.2-dist/js/bootstrap.min.js">
+
+</script>
+
+<!-- (A) THE CSS -->
+<style>
+#dbox {
+  /* (A1) CENTER ON PAGE */
+  position: absolute;
+  top: 40%; left: 50%;
+  transform: translate(-50%);
+  /* (A2) DIMENSIONS */
+  width: 400px;
+  padding: 10px;
+  /* (A3) COLORS */
+  color: #333;
+  border: 1px solid #c52828;
+  background: #ffebe1;
+  /* (A4) HIDE */
+  display: none;
+}
+</style>
+
+
+
+
+
+<script type="text/javascript">
+
+function Search()
+{
+  var SearchKeyWord=document.getElementById("SearchText").value;
+  var SelLength=document.myform.parcode.length;
+  for(var i=0; i<SelLength;i++)
+  {
+    var searched_text = document.myform.parcode.options[i].text;
+    var IsMatch = searched_text.search(SearchKeyWord);
+
+    if(IsMatch != -1)
+    {
+
+    //  document.myform.parcode.options[i].selected = true;
+      document.myform.parcode.options[i].style.color = 'red';
+      document.getElementById("parcode").value = searched_text;
+
+    }
+    else
+    {
+      document.myform.parcode.options[i].style.color = 'black';
+    }
+
+  }
+    keyup();
+}
+
+function Search2()
+{
+  var SearchKeyWord=document.getElementById("SearchText2").value;
+  var SelLength=document.myform.parcode.length;
+  for(var i=0; i<SelLength;i++)
+  {
+    var searched_text = document.myform.parcode.options[i].text;
+    var IsMatch = searched_text.search(SearchKeyWord);
+
+    if(IsMatch != -1)
+    {
+
+    //  document.myform.parcode.options[i].selected = true;
+      document.myform.parcode.options[i].style.color = 'red';
+      document.getElementById("parcode").value = searched_text;
+
+    }
+    else
+    {
+      document.myform.parcode.options[i].style.color = 'black';
+    }
+
+  }
+    keyup();
+}
+
+
+
+//document.getElementById("qu").accessKey = "w";
+
+document.addEventListener('keydown', (event) => {
+  var name = event.key;
+  var code = event.code;
+  // Alert the key name and key code on keydown
+  if (name == "Shift"){
+    myCreateFunction();
+     return false;
+  }else if(name == "+"){
+      document.getElementById("par2").focus();
+    var x = document.getElementById("qu").value;
+    x++;
+ document.getElementById("qu").value=x;
+ return false;
+}else if(name == "-"){
+    document.getElementById("par2").focus();
+  var x = document.getElementById("qu").value;
+  x--;
+document.getElementById("qu").value=x;
+ return false;
+}else if (name == "ArrowDown"){
+  document.getElementById("qu").value="";
+  document.getElementById("qu").focus();
+}else if(name=="ArrowUp"){
+
+  document.getElementById("parcode").value="";
+  document.getElementById("parcode").focus();
+
+}else if(code=="ControlLeft"){
+  document.getElementById("theform").submit();
+
+}else if ( name == "ArrowLeft"){
+  document.getElementById("SearchText").focus();
+}else if(code =="ControlRight"){
+  printDiv('printablediv');
+}else if(name=="Enter"){
+  var x=document.getElementById("SearchText").value;
+  if(x!=""){
+    keyup2();
+  }
+
+
+
+}
+ }, false);
+
+function hide(){
+  var t = 'none';
+var table = document.getElementById('myTable');
+var rows = table.getElementsByTagName('tr');
+for (var row=0; row<rows.length;row++) {
+var col = rows[row].getElementsByTagName('td')
+col[1].style.display=t;
+}
+}
+
+function dbox (msg) {
+  // (B1) GET ELEMENTS
+  var box = document.getElementById("dbox"),
+      boxm = document.getElementById("dboxm");
+
+  // (B2) SHOW/HIDE
+  boxm.innerHTML = (msg === undefined) ? "" : msg ;
+  box.style.display = (msg === undefined) ? "none" : "block";
+}
+
+function myCreateFunction() {
+
+
+if(document.getElementById("val").value=="" || document.getElementById("parcode").value==""  || document.getElementById("qu").value<=0  ){
+
+  //confirm("data is invalid ! please check your price and parcode and Quantity");
+dbox("data is invalid ! please check your price and parcode and Quantity");
+
+}else{
+
+
+  var val = document.getElementById("val").value;
+  var valint = parseFloat(val);
+  var qu =  document.getElementById("qu").value;
+var quint = parseFloat(qu);
+ var price = quint * valint ;
+
+  var table = document.getElementById("myTable");
+  var row = table.insertRow(table.last);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  var cell4 = row.insertCell(3);
+  var cell5 = row.insertCell(4);
+  var cell6 = row.insertCell(5);
+
+  var m = document.getElementById('myTable').rows.length - 1
+
+  cell1.innerHTML =  "<button type= 'button'  onclick='deleteRow(this)' onclick='deleteRow(this)' class='btn btn-outline-dark'> " +m + "</button>" ;
+  cell2.innerHTML = document.getElementById("par2").value;
+  cell2.style.display = "none";
+  cell3.innerHTML = document.getElementById("nme").value;
+    cell4.innerHTML =  valint;
+  cell5.innerHTML =  document.getElementById("qu").value;
+  cell6.innerHTML = price;
+//  cell6.innerHTML = "<button type= 'button'  onclick='deleteRow(this)' onclick='deleteRow(this)' class='btn btn-primary'></button>";
+
+
+  var table = document.getElementById("myTable"), sumVal = 0;
+var all3 ="";
+        for(var i = 1; i < table.rows.length; i++)
+        {
+          var row= "";
+            var state = "";
+          for(var j = 0 ; j <= 4 ; j ++){
+
+            switch (j) {
+              case 1:
+                state= " Parcode:";
+                break;
+                case 2:
+                  state= " Name:";
+                  break;
+                  case 3:
+                    state= " price:";
+                    break;
+                  case 4:
+                    state= " Quantity:";
+                    break;
+                    case 5:
+                      state= " total: ";
+
+                break;
+              default: state = ":"
+
+            }
+            row += state + table.rows[i].cells[j].innerHTML + " " ;
+          }
+
+          all3 += row +  " // ";
+            sumVal = sumVal + parseFloat(table.rows[i].cells[5].innerHTML);
+
+
+        }
+        all3 += " / total :" + sumVal;
+        document.getElementById("data").innerHTML = all3;
+        if(sumVal < 0){
+          sumVal = 0;
+        }
+        document.getElementById("cash").innerHTML =  sumVal;
+          document.getElementById("cash2").innerHTML =  sumVal;
+        console.log(sumVal);
+
+
+list();
+resetform();
+hide();
+document.getElementById("SearchText").value="";
+document.getElementById("SearchText").focus();
+
+}
+}
+
+function list(){
+  var table = document.getElementById("myTable");
+  var myarray1 = [];
+var myarray2 = [];
+var myarray3 = [];
+var myarray4 = [];
+
+for(var i =2 ; i<=table.rows.length; i++){
+  var x = i-1 ;
+  var j = i-2 ;
+  myarray1[j] = table.rows[x].cells[1].innerHTML;
+  myarray2[j] = parseFloat(table.rows[x].cells[4].innerHTML);
+  myarray3[j] = table.rows[x].cells[2].innerHTML;
+  myarray4[j] = parseFloat(table.rows[x].cells[5].innerHTML);
+
+}
+//var json1 = JSON.parse(myarray1);
+document.getElementById("myarray1").value = myarray1;
+document.getElementById("myarray2").value = myarray2;
+document.getElementById("myarray3").value = myarray3;
+document.getElementById("myarray4").value = myarray4;
+}
+
+function deleteRow(r) {
+  var i = r.parentNode.parentNode.rowIndex;
+  document.getElementById("myTable").deleteRow(i);
+
+
+
+    var table = document.getElementById("myTable"), sumVal = 0;
+  var all3 ="";
+          for(var i = 1; i < table.rows.length; i++)
+          {
+            var row= "";
+              for(var j = 0 ; j <= 4 ; j ++){
+                switch (j) {
+                  case 1:
+                    state= " Parcode:";
+                    break;
+                    case 2:
+                      state= " Name:";
+                      break;
+                      case 3:
+                        state= "price:";
+                        break;
+                      case 4:
+                        state= " Quantity:";
+                        break;
+                        case 5:
+                          state= " total: ";
+
+                    break;
+                  default: state = ":"
+
+                }
+                row += state + table.rows[i].cells[j].innerHTML + " " ;
+            }
+            all3 += row + " // ";
+              sumVal = sumVal + parseFloat(table.rows[i].cells[5].innerHTML);
+          }
+          all3 += " / total :" + sumVal;
+          document.getElementById("data").innerHTML = all3;
+          if(sumVal < 0){
+            sumVal = 0;
+          }
+          document.getElementById("cash").innerHTML =  sumVal;
+            document.getElementById("cash2").innerHTML =  sumVal;
+          console.log(sumVal);
+list();
+}
+
+var key = document.addEventListener('keypress', logKey);
+document.getElementById("key").innerHTML = key;
+
+function resetform() {
+ document.getElementById("qu").value = 1;
+
+ document.getElementById("parcode").value = "";
+
+ document.getElementById("val").value="";
+
+ document.getElementById("nme").value="";
+
+  document.getElementById("par2").value="";
+  document.getElementById("SearchText").value="";
+
+}
+
+function resettable (){
+
+var tableHeaderRowCount = 1;
+var table = document.getElementById('myTable');
+var rowCount = table.rows.length;
+for (var i = tableHeaderRowCount; i < rowCount; i++) {
+    table.deleteRow(tableHeaderRowCount);
+}
+document.getElementById("cash").innerHTML = 0 ;
+ document.getElementById("dis").value=0;
+
+
+   var table = document.getElementById("myTable"), sumVal = 0;
+ var all3 ="";
+         for(var i = 1; i < table.rows.length; i++)
+         {
+           var row= "";
+           for(var j = 0 ; j <= 4 ; j ++){
+             row += table.rows[i].cells[j].innerHTML + " "
+           }
+           all3 += row + " / ";
+             sumVal = sumVal + parseFloat(table.rows[i].cells[5].innerHTML);
+         }
+         all3 += " / total :" + sumVal;
+         document.getElementById("data").innerHTML = all3;
+         if(sumVal < 0){
+           sumVal = 0;
+         }
+         document.getElementById("cash").innerHTML =  sumVal;
+         console.log(sumVal);
+document.getElementById("dis2").value="";
+
+ list();
+
+}
+
+function dis() {
+  if(document.getElementById("dis").value==""){
+
+  }else{
+  var dis = document.getElementById("dis").value;
+dis = parseFloat(dis);
+document.getElementById("dis2").value = dis ;
+document.getElementById("dis3").innerHTML = dis ;
+  var table = document.getElementById("myTable"), sumVal = 0;
+var all3 ="";
+        for(var i = 1; i < table.rows.length; i++)
+        {
+          var row= "";
+          for(var j = 0 ; j <= 4 ; j ++){
+            var state = "";
+            switch (j) {
+              case 1:
+                state= " Parcode:";
+                break;
+                case 2:
+                  state= " Name:";
+                  break;
+                  case 3:
+                    state= " price:";
+                    break;
+                  case 4:
+                    state= " Quantity:";
+                    break;
+                    case 5:
+                      state= " total: ";
+
+                break;
+              default: state = ":"
+
+            }
+            row += state + table.rows[i].cells[j].innerHTML + " " ;
+          }
+          all3 += row + " / ";
+            sumVal = sumVal + parseFloat(table.rows[i].cells[5].innerHTML);
+        }
+        sumVal = sumVal - dis;
+        all3 += " / total :" + sumVal;
+        all3 += " / discoun :" + dis;
+        if(sumVal < 0){
+          sumVal = 0;
+        }
+              document.getElementById("data").innerHTML = all3;
+        document.getElementById("cash").innerHTML =  sumVal;
+        console.log(sumVal);
+}
+}
+/*
+function printData()
+{
+
+  var divElements = document.getElementById("printablediv").innerHTML;
+
+ var page =  "<html><head><title></title>"+
+"</head><body style='font-weight: 900;'>  <h1 style=' font-weight: 100px;   font-size: 50px;  text-align: center;'>        المصري ماركت</h1>"   + " </div></div>"
+ + "<div style=' font-weight: 300px; font-size: 10px; '>"+
+  divElements + "<p style='text-align: center;'> ....................................................................................................................... </p>" + " <p style='text-align: center;'> المصري ماركت لجميع أنواع البقالة والجبن  </p>" +" <p style='text-align: center; font-size:10px;' > العنوان : بورفؤاد - أبراج محمد علي بجوار مسجد السيدة خديجة </p>"
+   + " للأستفسار <img src='phoneicon.png' alt='phone: '> :  01069562285 </div>" +"</body>";
+
+   var divToPrint=document.getElementById("myTable");
+
+//   divToPrint = divToPrint ;
+
+var newWin= window.open('/test',"popup",'width=1200,height=900');
+ newWin.document.write(page);
+   newWin.print();
+   newWin.close();
+}
+*/
+
+function keyup() {
+  var x = document.getElementById("parcode").value;
+  if (x!="other" || x!="") {
+    var response = x.substring(x.indexOf("$")+1,x.indexOf("/")-1);
+    document.getElementById("val").value = response;
+    var name = x.substring(x.indexOf(":")+1,x.indexOf("$")-1);
+    document.getElementById("nme").value = name;
+    var parcode = x.substring(0,x.indexOf(":")-1);
+    document.getElementById("par2").value = parcode;
+    var qux = x.substring(x.indexOf("/")+2);
+    document.getElementById("qux").value = qux;
+  }
+
+}
+ function  keyup2() {
+  var x = document.getElementById("parcode").value;
+  if (x!="other" || x!="") {
+    var response = x.substring(x.indexOf("$")+1,x.indexOf("/")-1);
+    document.getElementById("val").value = response;
+    var name = x.substring(x.indexOf(":")+1,x.indexOf("$")-1);
+    document.getElementById("nme").value = name;
+    var parcode = x.substring(0,x.indexOf(":")-1);
+    document.getElementById("par2").value = parcode;
+    var qux = x.substring(x.indexOf("/")+2);
+    document.getElementById("qux").value = qux;
+  myCreateFunction();
+  }
+
+}
+
+
+function printDiv(divID) {
+      //Get the HTML of div
+
+      var divElements = document.getElementById(divID).innerHTML;
+        //Get the HTML of whole page
+        var oldPage = document.body;
+
+        document.body.outerHTML =
+          "<html><head><title></title><style>  table, th, td,tr {border: 15px solid black; }</style></head><body style='font-weight:500; border: 10px solid black; double black;'> "   + " <p style='text-align: center;'>"+"<img src='icon.ico' width=10% height=15% alt='phone: '> "+ "  </p>   </div></div>"
+           + "<div style=' font-weight: 300px; font-size: 20px;  '>"+
+          divElements + "<p style='text-align: center;'> .......................................................................................................................<br> 01288688857 &nbsp;&nbsp;&nbsp; 01127089311 &nbsp;&nbsp;&nbsp; 066-3418997 " + " </p>"+"<p style='text-align: center; font-size:15px;'>العنوان : شارع الجمهورية برج العيلة محل رقم 5 بجوار حلواني فاميلي</p>"
+           + " <div style='font-size:15px;'> س.ت : 8711 &nbsp;&nbsp;&nbsp; ب.ض : 059-261-374 &nbsp;&nbsp;&nbsp; ض.ق.م : 059-261-374 </div> </div>" +"</body>";
+        //Print Page
+        window.print();
+        //Restore orignal HTML
+       document.body = oldPage;
+
+  }
+
+</script>
+
+
+<style media="screen">
+
+td:nth-child(1) {
+    font-weight : bold ;
+
+}
+
+
+/* Split the screen in half */
+.split {
+  height: 95%;
+
+  position: fixed;
+  z-index: 1;
+  top: 8%;
+
+  overflow-x: hidden;
+  padding-top: 0px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+width: 73%;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+width: 30%;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* Style the image inside the centered container, if needed */
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+
+</style>
+
+  </head>
+  <body>
+
+    <nav  class="navbar navbar-light" style="background-color: rgba(0, 0, 255, 0.3); margin:20px; padding:20px; " >
+      <h3 > Cash Register : </h3>
+      <div class="btn-group btn-group-lg" role="group"  aria-label="...">
+    <a href="/setting">  <button type="button" class="btn btn-primary btn-lg" >Settings</button> </a>
+    <a href="/login"> <button type="button" class="btn btn-primary btn-lg" style="margin-left:40px;">Logout</button> </a>
+      </div>
+    </nav>
+    <div class="demo-wrap">
+      <img
+        class="demo-bg"
+        src="icon.ico"
+        alt=""
+      >
+    </div>
+
+<img src='phoneicon.png' hidden alt='phone: '>
+<img src='icon.ico' hidden alt='phone: '>
+
+
+<div class="split right">
+    <div class="card" style="  border: 1px solid black;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 15px;
+  margin-left: 80px;
+  background-color: rgba(0, 0, 255, 0.3);">
+
+      <div class="card-body" >
+<form name="myform">
+
+
+
+<span class="input-group-text"> sell :
+<input type="text" name="SearchText" onkeyup="Search()"  id="SearchText"></span> <br><br>
+
+<span class="input-group-text"> search :
+<input type="text" name="SearchText2" placeholder="xxxxxxxxxx" onkeyup="Search2()" id="SearchText2" ></span>
+<br><br>
+    <select id="parcode" name="parcode" required list="country-list" onchange="keyup()"   class="form-select form-control" aria-label="Default select example">
+
+
+
+<!--    <select  id="parcode"  onclick="keyup()" class="form-select" aria-label="Default select example"> -->
+      <option></option>
+  <option  >other</option>
+  <% result.forEach(function(result){%>
+  <option ><%=result.parcode%> :
+  <%=result.name%>   $
+<%=result.priceOfsell%> // <%=result.quantity%>
+      </option>
+<%  }) %>
+
+</select>
+
+<br>
+<br><br>
+<span class="input-group-text"> parcode
+<input type="text" placeholder="parcode" name="" readonly id="par2"></span>
+<br>
+<span class="input-group-text"> الاسم
+<input type="text" style="" placeholder="Name" readonly name="" id="nme"></span>
+<br>
+<span class="input-group-text">الكمية
+<input type="text" placeholder="quantity" readonly name="" id="qux"></span>
+<br>
+<span class="input-group-text">EGP
+<input type="text" placeholder="Price" name="" id="val"></span></span>
+</form>
+
+
+
+
+
+<br>
+  <div class="row">
+  <div class="col">
+    <input type="number" name="quantity"  class="form-control" id="qu" min="0" value="1"  placeholder="Quantity" aria-label="First name" >
+  </div>
+  <div class="col">
+  <button type="button"  onclick="myCreateFunction()"   class="btn btn-primary">Add</button> <div id="dbox"><div id="dboxm"></div><input type="button" value="OK" onclick="dbox()"/></div>
+
+<br> <br><br>
+  <button type="button" class="btn btn-primary"   target="popup"
+    onclick="window.open('http://localhost:3000/cashier','popup','width=1200,height=900'); return false;">
+  صفحة أخرى
+  </button>
+  <button type="button" class="btn btn-primary" data-bs-toggle="button" style="margin-left:70%;" onclick="resettable()" autocomplete="off">الغاء</button>
+
+
+  </div>
+</div>
+
+      </div>
+    </div>
+</div>
+<!----------------------------------------------------------------------------->
+<div class="split left">
+        <div class="card" style="  border: 1px solid black;
+      margin-top: 100px;
+      margin-bottom: 100px;
+
+      margin-left: 10px;
+      background-color: rgba(0, 0, 255, 0.1);">
+          <div class="card-body" >
+
+            <div class="input-group mb-3">
+
+              <input type="submit" onclick="javascript:printDiv('printablediv')" value="Print"  class="btn btn-primary">
+
+
+              <input type="number" min="0.00" class="form-control" value="0.00" id="dis" placeholder="discount" style="margin-left:60%" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <button class="btn btn-outline-secondary" onclick="dis()" type="button" id="button-addon2">OK!</button>
+
+            </div>
+
+
+
+<form method="post" id="theform">
+
+  <div id="printablediv">
+  <textarea name="data" id="data" hidden rows="8" cols="80"></textarea>
+    <div class="input-group">
+
+Date:<p id="date2" style="background-color: white; " > </p>
+&nbsp;
+
+Time:<p id="date3" style="background-color: white;"> </p></div>  <div class="input-group">
+   &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;<p  style="background-color: white;">  &nbsp;&nbsp;&nbsp; <%=num%> &nbsp;&nbsp;   : رقم الفاتورة</p> </div>
+
+
+  <input type="hidden" id="date"  name="date"  readonly>
+
+
+
+  <script>
+  n =  new Date();
+  y = n.getFullYear();
+  m = n.getMonth() + 1;
+  d = n.getDate();
+   var h = n.getHours();
+   var mi = n.getMinutes();
+   var x =n.toLocaleTimeString('en-US')
+  document.getElementById("date").value = d + "/" + m + "/" + y;
+  document.getElementById("date2").innerHTML = d + "/" + m + "/" + y ;
+
+    document.getElementById("date3").innerHTML =  x ;
+  </script>
+
+  <div class="input-group">
+    <input type="hidden"  name="num" value="<%=num%>" readonly>
+
+
+    </div>
+<style media="screen">
+table td {
+        padding: 0.5rem;
+        border: 10px solid orange;
+    }
+    table th {
+        padding: 0.5rem;
+        border: 10px solid ForestGreen;
+    }
+</style>
+              <table  class="table table-sm  table-bordered border-primary "  border="1"  style=" border:5px double black; text-align: center;"  cellpadding="3" id="myTable">
+                <colgroup>
+   <col span="1" >
+   <col span="1">
+   <col span="1" style="width: 50%;">
+   <col span="1" >
+   <col span="1" >
+</colgroup>
+                <thead style="font-size:20px;" class="table-light">
+
+
+                  <tr>
+                    <th scope="col">م</th>
+                   <th hidden scope="col">parcode</th>
+                    <th scope="col">الأسم</th>
+  <th scope="col">سعر</th>
+                    <th scope="col">ك</th>
+
+                    <th scope="col">اجمالي</th>
+
+
+
+                  </tr>
+                </thead>
+
+                <tbody >
+
+                </tbody>
+
+              </table>
+                  <div class="input-group">
+              <input type="hidden" placeholder="0" name="dis" id="dis2" readonly>
+<table   class="table table-sm  table-bordered border-primary "  border="1"  style="background-color:white; border:5px double black; text-align: center;" border="1" cellpadding="3">
+  <thead>
+    <th>الصافي</th>
+    <th>الخصم</th>
+    <th>الاجمالي</th>
+  </thead>
+  <tbody>
+    <td>    <div class="input-group">EGP &nbsp;&nbsp; <div id="cash">0</div> </div></td>
+    <td><div id="dis3">0</div></td>
+      <td> <div id="cash2"> 0 </div></td>
+
+  </tbody>
+</table>
+
+
+
+</div>
+</div>
+<input  type="hidden" id="myarray1"  name="myarray1" >
+<input type="hidden" id="myarray2"  name="myarray2" >
+<input  type="hidden" id="myarray3"  name="myarray3" >
+<input type="hidden" id="myarray4"  name="myarray4" >
+
+<br>
+<div class="d-grid gap-2">
+  <button class="btn btn-primary" id="sub" style="margin:40px; margin-right:350px; margin-left:350px;" type="submit"><h3>Done ! </h3></button>
+
+
+</div>
+</form>
+          </div>
+        </div>
+</div>
+  </body>
+</html>
