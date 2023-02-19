@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<%-include('header')-%>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Add Product</title>
+
+	<!-- Google font -->
+
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="colorlib-booking-5/css/bootstrap.min.css" />
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="colorlib-booking-5/css/style.css" />
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+<style media="screen">
+
+#myTable {
+border-collapse: collapse; /* Collapse borders */
+width: 100%; /* Full-width */
+border: 1px solid #ddd; /* Add a grey border */
+font-size: 18px; /* Increase font-size */
+}
+
+#myTable th, #myTable td {
+text-align: left; /* Left-align text */
+padding: 12px; /* Add padding */
+}
+
+#myTable tr {
+/* Add a bottom border to all table rows */
+border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+/* Add a grey background color to the table header and on hover */
+background-color: #f1f1f1;
+}
+
+</style>
+
+</head>
+
+<body  style="background-color: #DEDDF0; ">
+	<div id="booking" class="section">
+		<div class="section-center">
+
+			<div class="container">
+			<h1 style="color: grey; ">  trader configuratio : </h3>
+				<div class="row">
+					<div class="booking-form">
+						<form method="POST">
+						<br><br>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<span class="form-label"><h3>Full Name : </h3>  </span><br>
+
+										<input id="parcode" type="text" name="name"  required list="country-list" onkeyup="keyup()" class="form-select form-control" aria-label="Default select example" />
+										<datalist id="country-list">
+
+
+
+								<!--    <select  id="parcode"  onclick="keyup()" class="form-select" aria-label="Default select example"> -->
+											<option></option>
+
+									<% result.forEach(function(result){%>
+									<option ><%=result.id%> :
+									<%=result.name%>   $
+
+											</option>
+								<%  }) %>
+
+
+										</datalist>
+
+									</div>
+								</div>
+
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label"> <h3>  phone </h3> </span><br>
+										<input class="form-control" maxlength="15" name="phone" type="text" required>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label"> <h3>  trade type  </h3></span><br>
+										<input class="form-control" maxlength="68" name="tradetype" type="text" required>
+									</div>
+								</div>
+
+
+							</div>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label"> <h3> national id</h3> </span><br>
+										<input class="form-control" maxlength="15" name="nid" type="text" required>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label"> <h3> tax numper </h3></span><br>
+										<input class="form-control" maxlength="20" name="taxnum" type="text" required>
+									</div>
+								</div>
+
+
+							</div>
+							<div class="row">
+
+								<div class="col-md-3">
+									<div class="form-btn">
+										 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+										<button type="submit" class="submit-btn"> Configure  </button>
+									<a href="/trademovs">	<button type="button" class="btn btn-primary btn-lg">tradermovs</button></a>
+									</div>
+								</div>
+									<br>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="card" style="margin:2%; ">
+  <div class="card-body">
+
+
+	<table onload="tr()" class="table table-sm table-hover"  border="1" cellpadding="3" id="myTable" >
+		<th>
+				<tr>
+
+					<th scope="col">id</th>
+
+					<th scope="col"> Name </th>
+					<th scope="col"> phone </th>
+					<th scope="col">Trade-type </th>
+						<th scope="col">national-id </th>
+							<th scope="col">Tax-number </th>
+					<th scope="col">El-safy </th>
+
+
+				</tr>
+
+		</th>
+		<tbody>
+			<% result.forEach(function(result){%>
+			<tr>
+
+<td><%=result.id%></td>
+
+		<td><%=result.name%></td>
+
+		<td><%=result.phone%></td>
+
+			<td><%=result.tradetype%></td>
+					<td><%=result.nationalid%></td>
+							<td><%=result.taxnum%></td>
+		<td><%=result.safy%></td>
+
+</tr>
+		<%  }) %>
+		</tbody>
+	</table>
+
+</div>
+</div>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
