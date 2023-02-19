@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <style media="screen">
+  .card {
+box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+transition: 0.3s;
+width: 40%;
+}
+
+.card:hover {
+box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+padding: 2px 16px;
+}
+  </style>
+  <body style="margin: 3%; padding: 3%; background-color: #DEDDF0; font-size: 45px" >
+<a href="/update"style="margin: 3%; padding: 3%; background-color:#F0FFFF;  font-size: 30px">العوده لجدول تحديث البيانات</a>
+    <br><br>
+    <div class="card" style="margin: 3%; padding: 3%; background-color: #F0FFFF; " >
+    <form method="POST">
+      <input type="text" value="<%=name%>" style="font-size: 30px" id="buy" name="name" maxlength="40"  required>
+      <label for="fname"> : الاسم </label><br>
+      <br>
+      <input type="text" value="<%=parcode%>" style="font-size: 30px" id="buy" name="parcode2" maxlength="40"  required>
+      <label for="fname">: parcode  </label><br>
+      <br>
+      <input type="text" style="font-size: 30px" id="buy" value="<%=buy%>" name="buy" maxlength="12"  required>
+      <label for="fname">:سعر الشراء</label><br>
+      <br>
+        <input type="text" id="sell" style="font-size: 30px" maxlength="12" value="<%=sell%>" name="sell" required >
+      <label for="lname">:سعر البيع </label><br>
+      <br>
+        <input type="number" id="sell" style="font-size: 30px" maxlength="12" value="<%=qu%>" name="qu" required >
+      <label for="lname">:الكمية  </label><br>
+      <br><br>
+    <button type="submit" style="font-size: 45px" name="button">تحديث</button>
+    </form>
+    </div>
+  </body>
+</html>
