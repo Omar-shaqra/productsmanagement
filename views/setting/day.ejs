@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<%-include('header')-%>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="bootstrap-5.0.2-dist/js/bootstrap.min.js">
+   </script>
+
+<style media="screen">
+#myInput {
+background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+background-position: 10px 12px; /* Position the search icon */
+background-repeat: no-repeat; /* Do not repeat the icon image */
+width: 100%; /* Full-width */
+font-size: 16px; /* Increase font-size */
+padding: 12px 20px 12px 40px; /* Add some padding */
+border: 1px solid #ddd; /* Add a grey border */
+margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myInput2 {
+background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+background-position: 10px 12px; /* Position the search icon */
+background-repeat: no-repeat; /* Do not repeat the icon image */
+width: 100%; /* Full-width */
+font-size: 16px; /* Increase font-size */
+padding: 12px 20px 12px 40px; /* Add some padding */
+border: 1px solid #ddd; /* Add a grey border */
+margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myInput3 {
+background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+background-position: 10px 12px; /* Position the search icon */
+background-repeat: no-repeat; /* Do not repeat the icon image */
+width: 100%; /* Full-width */
+font-size: 16px; /* Increase font-size */
+padding: 12px 20px 12px 40px; /* Add some padding */
+border: 1px solid #ddd; /* Add a grey border */
+margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myTable {
+border-collapse: collapse; /* Collapse borders */
+width: 100%; /* Full-width */
+border: 1px solid #ddd; /* Add a grey border */
+font-size: 18px; /* Increase font-size */
+}
+
+#myTable th, #myTable td {
+text-align: left; /* Left-align text */
+padding: 12px; /* Add padding */
+}
+
+#myTable tr {
+/* Add a bottom border to all table rows */
+border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+/* Add a grey background color to the table header and on hover */
+background-color: #f1f1f1;
+}
+
+</style>
+
+<script type="text/javascript">
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+    var sumVal = 0;
+      var sumVal2 = 0;
+
+var j = 0 ;
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 2; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        var ex = tr[i].getElementsByTagName("td")[4].textContent || tr[i].getElementsByTagName("td")[4].innerText;
+              sumVal = sumVal + parseFloat(ex) ;
+              var ex2 = tr[i].getElementsByTagName("td")[5].textContent || tr[i].getElementsByTagName("td")[4].innerText;
+                    sumVal2 = sumVal2 + parseFloat(ex2) ;
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+
+
+  }
+
+
+
+  document.getElementById("total").innerHTML = sumVal;
+    document.getElementById("total2").innerHTML = sumVal2;
+
+}
+
+
+function myFunction2() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput2");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+    var sumVal = 0;
+    var sumVal2 = 0;
+var j = 0 ;
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 2; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[6];
+
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        var ex = tr[i].getElementsByTagName("td")[4].textContent || tr[i].getElementsByTagName("td")[4].innerText;
+              sumVal = sumVal + parseFloat(ex) ;
+              var ex2 = tr[i].getElementsByTagName("td")[5].textContent || tr[i].getElementsByTagName("td")[4].innerText;
+                    sumVal2 = sumVal2 + parseFloat(ex2) ;
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+
+
+  }
+
+
+
+  document.getElementById("total").innerHTML = sumVal;
+document.getElementById("total2").innerHTML = sumVal2;
+}
+
+
+function myFunction3() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput3");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+    var sumVal = 0;
+      var sumVal2 = 0;
+var j = 0 ;
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 2; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        var ex = tr[i].getElementsByTagName("td")[4].textContent || tr[i].getElementsByTagName("td")[4].innerText;
+              sumVal = sumVal + parseFloat(ex) ;
+              var ex2 = tr[i].getElementsByTagName("td")[5].textContent || tr[i].getElementsByTagName("td")[4].innerText;
+                    sumVal2 = sumVal2 + parseFloat(ex2) ;
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+
+
+  }
+
+
+
+  document.getElementById("total").innerHTML = sumVal;
+document.getElementById("total2").innerHTML = sumVal2;
+}
+
+
+
+
+</script>
+
+  </head>
+  <body style="background-color: #DEDDF0; ">
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by date..">
+<input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search by number of fatwra..">
+<input type="text" id="myInput3" onkeyup="myFunction3()" placeholder="Search by parcode..">
+<br><br>
+
+    <div class="card" style="margin: 2%; font-size: 25px;">
+      <div class="card-body">
+
+       <h5 class="card-title border border-success  border-5"  > <span style="font-size:20px;  font-weight:bold;" class="input-group-text">  Total price : &nbsp; <div style="color: green;"  onload="gettotal()"  id="total">0</div>&nbsp; $</span></h5>
+       <h5 class="card-title border border-success  border-5"> <span style="font-size:20px; font-weight:bold;" class="input-group-text">  Total safy :&nbsp; <div onload="gettotal()" style="color: green;" id="total2">0</div>&nbsp; $</span></h5>
+    <table onload="tr()" class="table table-sm table-hover"  border="1" cellpadding="3" id="myTable" >
+      <th>
+          <tr>
+
+            <th scope="col">Date</th>
+            <th scope="col">Parcode</th>
+            <th scope="col"> Name </th>
+            <th scope="col"> Quantity </th>
+            <th scope="col"> Price </th>
+            <th scope="col"> totalsafy </th>
+            <th scope="col">num</th>
+
+
+          </tr>
+
+      </th>
+      <tbody>
+        <% result.forEach(function(result){%>
+        <tr>
+
+  <td><%=result.date%></td>
+  <td><%=result.parcode%></td>
+      <td><%=result.name%></td>
+
+      <td><%=result.quantity%></td>
+      <td><%=result.price%></td>
+      <td><%=result.totalsafy%></td>
+      <td><%=result.num%></td>
+</tr>
+      <%  }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+  </body>
+</html>
