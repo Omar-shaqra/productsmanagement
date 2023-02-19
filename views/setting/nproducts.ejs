@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<%-include('header')-%>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+	<title>Add Product</title>
+
+	<!-- Google font -->
+
+
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="colorlib-booking-5/css/bootstrap.min.css" />
+
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="colorlib-booking-5/css/style.css" />
+
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body  style="background-color: #DEDDF0; ">
+	<div id="booking" class="section">
+		<div class="section-center">
+
+			<div class="container">
+			<h1 style="color: grey; ">  Create Product : </h3>
+				<div class="row">
+					<div class="booking-form">
+						<form method="POST">
+						<br><br>
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<span class="form-label"><h3> product Parcode </h3>  </span><br>
+
+																				<input  type="text" value="<%=num%>" name="incode" readonly placeholder="الكود الداخلي" required list="country-list" class="form-select form-control" aria-label="Default select example" />
+
+														<input  type="text" maxlength="45" name="taxcode" placeholder="الكود الضريبي" required list="country-list" value=".EG-374261059." readonly class="form-select form-control" aria-label="Default select example" />
+
+										<input id="parcode" type="text" maxlength="45" name="parcode" placeholder="parcode like 1237152345" required list="country-list" onkeyup="keyup()" class="form-select form-control" aria-label="Default select example" />
+										<datalist id="country-list">
+
+
+
+								<!--    <select  id="parcode"  onclick="keyup()" class="form-select" aria-label="Default select example"> -->
+											<option></option>
+
+									<% result.forEach(function(result){%>
+									<option ><%=result.parcode%> :
+									<%=result.name%>   $
+								<%=result.priceOfsell%>
+											</option>
+								<%  }) %>
+
+
+										</datalist>
+
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<span class="form-label"> <h3> Product Name </h3> </span><br>
+										<input class="form-control" type="text" name="name" placeholder="Name like orange" maxlength="45" required>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label"> <h3>  سعر الشراء </h3> </span><br>
+										<input class="form-control" maxlength="13" name="buy" type="text" required>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<span class="form-label"> <h3>  سعر البيع  </h3></span><br>
+										<input class="form-control" maxlength="13" name="sell" type="text" required>
+									</div>
+								</div>
+
+
+							</div>
+							<div class="row">
+
+								<div class="col-md-3">
+									<div class="form-btn">
+										<button type="submit" class="submit-btn"> Configure  </button>
+									</div>
+									<br>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
