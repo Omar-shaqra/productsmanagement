@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<%-include('header')-%>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap-5.0.2-dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="bootstrap-5.0.2-dist/js/bootstrap.min.js">
+   </script>
+
+<script type="text/javascript">
+
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+    var sumVal = 0;
+      var sumVal2 = 0;
+
+var j = 0 ;
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 2; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+
+
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+
+
+  }
+
+
+
+}
+
+
+function sum(){
+
+var table = document.getElementById("myTable"),sumVal=0;
+for ( var i = 2 ; i<= table.rows.length-2;i++){
+  var x = parseFloat(table.rows[i].cells[2].innerHTML);
+  var y =  parseFloat(table.rows[i].cells[5].innerHTML);
+  var z = parseFloat(x * y);
+  sumVal = sumVal + z;
+}
+
+    document.getElementById("buy").innerHTML =  sumVal;
+
+var sumsell=0;
+    for ( var i = 2 ; i<= table.rows.length-2;i++){
+      var x =  parseFloat(table.rows[i].cells[3].innerHTML);
+
+      sumsell = sumsell + z
+    }
+  document.getElementById("sell").innerHTML =  sumsell;
+
+
+  var sumsafy=0;
+  for ( var i = 2 ; i<= table.rows.length-2;i++){
+    var x = parseFloat(table.rows[i].cells[4].innerHTML);
+    var y =  parseFloat(table.rows[i].cells[5].innerHTML);
+    var z = parseFloat(x * y);
+    sumsafy = sumsafy + z;
+  }
+
+      document.getElementById("safy").innerHTML =  sumsafy;
+
+}
+
+
+</script>
+
+  </head>
+  <body style="background-color: #DEDDF0; " onload="sum()">
+<div class="input-group">
+
+
+
+
+
+
+
+
+</div>
+
+
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="بحث عن طريق الاسم .. ">
+
+    <div class="card" style="margin: 2%; font-size: 25px;">
+    <table onload="tr()" class="table table-sm table-hover"  border="1" cellpadding="3" id="myTable" >
+      <th>
+          <tr>
+
+            <th scope="col">parcode</th>
+            <th scope="col">Name</th>
+            <th scope="col"> سعر الشراء  </th>
+            <th scope="col"> سعر البيع       </th>
+            <th scope="col"> صافي     </th>
+            <th scope="col">َQuantity</th>
+
+
+      </th>
+      <tbody>
+        <% result.forEach(function(result){%>
+        <tr>
+
+
+  <td><%=result.parcode%></td>
+      <td><%=result.name%></td>
+        <td><%=result.priceOfbuy%></td>
+    <td><%=result.priceOfsell%></td>
+      <td><%=result.safy%></td>
+      <td><%=result.quantity%></td>
+</tr>
+      <%  }) %>
+      <tr class="border border-success border border-5" style="font-weight: bold; border-style: solid;">
+        <td></td>
+        <td></td>
+        <td><div onload="sumbuy()" style="color: orange; font-size: 34px;" id="buy"></div></td>
+        <td> <div onload="sumsell()"  style="color: orange;font-size: 34px " id="sell"></div></td>
+        <td> <div onload="sumsafy()"  style="color: orange; font-size: 34px" id="safy"></div></td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  </body>
+</html>
